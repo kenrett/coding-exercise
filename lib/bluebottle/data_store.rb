@@ -3,14 +3,14 @@ module BlueBottle
   class DataStore
     def initialize
       @store = {
-          customers: [],
-          coffees: [],
-          subscriptions: []
+        customers: [],
+        coffees: [],
+        subscriptions: []
       }
     end
 
     def customers
-      @store[:customers]
+       @store[:customers]
     end
 
     def subscriptions
@@ -43,7 +43,15 @@ module BlueBottle
     end
 
     def cancel_subscription(customer, coffee)
-        customer.active_subscriptions.delete(coffee.name)
+      self.subscriptions.each do |sub|
+        if sub.status == "paused"
+          raise "'Sub status is paused. You cannot cancel a paused account."
+        end
+        if sub.customer_id == customer.id && sub.coffee_id == coffee.id && sub.status == "active"
+          customer.active_subscriptions.delete(coffee.name)
+          sub.status = "cancelled"
+        end
+      end
     end
   end
 end
