@@ -6,13 +6,15 @@ module BlueBottle
       attr_accessor :id,
                     :first_name,
                     :last_name,
-                    :email
+                    :email,
+                    :active_subscriptions
 
-      def initialize(id, first_name, last_name, email)
+      def initialize(id, first_name, last_name, email, active_subscriptions = [])
         @id = id
         @first_name = first_name
         @last_name = last_name
         @email = email
+        @active_subscriptions = active_subscriptions
       end
 
       def full_name

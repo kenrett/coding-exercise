@@ -5,14 +5,16 @@ module BlueBottle
     class Coffee
       attr_accessor :id,
                     :name,
-                    :type
+                    :type,
+                    :subscribers
 
       VALID_TYPES = ['blend','single_origin']
 
-      def initialize(id, name, type)
+      def initialize(id, name, type, subscribers = [])
         @id = id
         @name = name
         @type = type
+        @subscribers = subscribers
         validate_type
       end
 
