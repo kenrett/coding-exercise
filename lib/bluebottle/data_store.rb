@@ -44,8 +44,8 @@ module BlueBottle
 
     def cancel_subscription(customer, coffee)
       self.subscriptions.each do |sub|
-        if sub.status == "paused"
-          raise "'Sub status is paused. You cannot cancel a paused account."
+        if sub.status == "paused" && sub.coffee_id == coffee.id
+          raise "Sub status is paused. You cannot cancel a paused account."
         end
         if sub.customer_id == customer.id && sub.coffee_id == coffee.id && sub.status == "active"
           customer.active_subscriptions.delete(coffee.name)
