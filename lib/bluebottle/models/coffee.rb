@@ -18,6 +18,10 @@ module BlueBottle
         validate_type
       end
 
+      def active_subscribers
+        subscribers.first.active_subscriptions.size
+      end
+
       private
 
       def validate_type

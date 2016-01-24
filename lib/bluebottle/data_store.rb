@@ -3,14 +3,14 @@ module BlueBottle
   class DataStore
     def initialize
       @store = {
-        customers: [],
-        coffees: [],
-        subscriptions: []
+          customers: [],
+          coffees: [],
+          subscriptions: []
       }
     end
 
     def customers
-       @store[:customers]
+      @store[:customers]
     end
 
     def subscriptions
@@ -40,6 +40,10 @@ module BlueBottle
           customer.paused_subscriptions << coffee_to_pause
         end
       end
+    end
+
+    def cancel_subscription(customer, coffee)
+        customer.active_subscriptions.delete(coffee.name)
     end
   end
 end
