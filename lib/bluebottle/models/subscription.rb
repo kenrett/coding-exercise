@@ -6,11 +6,13 @@ module BlueBottle
     class Subscription
       attr_accessor :id,
                     :coffee_id,
-                    :customer_id
+                    :customer_id,
+                    :status
 
-      def initialize(coffee_id, customer_id)
+      def initialize(coffee_id, customer_id, status = "active")
         @coffee_id = coffee_id
         @customer_id = customer_id
+        @status = status
       end
     end
   end

@@ -61,16 +61,20 @@ describe BlueBottle::CodingQuestion do
   context 'Pausing:' do
     context 'when Liv pauses her subscription to Bella Donovan,' do
       before do
-        # Establish subscription here
+        @subscription = store.add_subscription(liv, bella_donovan)
+        store.pause_subscription(liv, bella_donovan, @subscription)
       end
 
-      xit 'Liv should have zero active subscriptions' do
+      it 'Liv should have zero active subscriptions' do
+        expect(liv.active_subscriptions.size).to eq(0)
       end
 
-      xit 'Liv should have a paused subscription' do
+      it 'Liv should have a paused subscription' do
+        expect(liv.paused_subscriptions.size).to eq(1)
       end
 
-      xit 'Bella Donovan should have one customers subscribed to it' do
+      it 'Bella Donovan should have one customers subscribed to it' do
+        expect(bella_donovan.subscribers.size).to eq(1)
       end
     end
   end

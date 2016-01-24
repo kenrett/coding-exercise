@@ -30,5 +30,16 @@ module BlueBottle
       coffee.subscribers << customer
       self.subscriptions << BlueBottle::Models::Subscription.new(coffee.id, customer.id)
     end
+
+    def pause_subscription(customer, coffee, subscription)
+      subscription.first.status = "paused"
+      coffee_to_pause = coffee.name
+      customer.active_subscriptions.each do |sub|
+        if sub == coffee_to_pause
+          customer.active_subscriptions.delete(sub)
+          customer.paused_subscriptions << coffee_to_pause
+        end
+      end
+    end
   end
 end
