@@ -1,6 +1,8 @@
 module BlueBottle
 
   class DataStore
+    attr_accessor :store
+
     def initialize
       @store = {
         customers: [],
@@ -27,7 +29,7 @@ module BlueBottle
 
     def add_subscription(customer, coffee)
       customer.active_subscriptions << coffee.name
-      coffee.subscribers << customer
+      coffee.total_subscribers(@store)
       self.subscriptions << BlueBottle::Models::Subscription.new(coffee.id, customer.id)
     end
 

@@ -1,25 +1,39 @@
 require 'active_support/all'
-
+require 'pry'
 module BlueBottle
   module Models
     class Coffee
       attr_accessor :id,
                     :name,
-                    :type,
-                    :subscribers
+                    :type
 
-      VALID_TYPES = ['blend','single_origin']
+      VALID_TYPES = ['blend', 'single_origin']
 
-      def initialize(id, name, type, subscribers = [])
+      def initialize(id, name, type)
         @id = id
         @name = name
         @type = type
-        @subscribers = subscribers
         validate_type
       end
 
-      def active_subscribers
-        subscribers.first.active_subscriptions.size
+      def active_subscribers(store)
+        total = []
+        store[:subscriptions].each do |s|
+          if s.coffee_id == self.id && s.status == "active"
+            total << s.coffee_id
+          end
+        end
+        total.size
+      end
+
+      def total_subscribers(store)
+        total = []
+        store[:subscriptions].each do |s|
+          if s.coffee_id == self.id
+            total << s.coffee_id
+          end
+        end
+        total.size
       end
 
       private
