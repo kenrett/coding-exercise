@@ -35,7 +35,8 @@ describe BlueBottle::CodingQuestion do
     end
 
     it 'Bella Donovan should have one customer subscribed to it' do
-      expect(bella_donovan.subscribers.size).to eq(1)
+      db_ish = store.store
+      expect(bella_donovan.total_subscribers(db_ish)).to eq(1)
     end
   end
 
@@ -54,7 +55,8 @@ describe BlueBottle::CodingQuestion do
     end
 
     it 'Hayes Valley Espresso should have two customers subscribed to it' do
-      expect(hayes_valley_espresso.subscribers.size).to eq(2)
+      db_ish = store.store
+      expect(hayes_valley_espresso.total_subscribers(db_ish)).to eq(2)
     end
   end
 
@@ -74,7 +76,8 @@ describe BlueBottle::CodingQuestion do
       end
 
       it 'Bella Donovan should have one customers subscribed to it' do
-        expect(bella_donovan.subscribers.size).to eq(1)
+        db_ish = store.store
+        expect(bella_donovan.total_subscribers(store.store)).to eq(1)
       end
     end
   end
@@ -91,7 +94,8 @@ describe BlueBottle::CodingQuestion do
       end
 
       it 'Bella Donovan should have zero active customers subscribed to it' do
-        expect(bella_donovan.active_subscribers).to eq(0)
+        db_ish = store.store
+        expect(bella_donovan.active_subscribers(db_ish)).to eq(0)
       end
 
       context 'when Jack resubscribes to Bella Donovan' do
@@ -101,7 +105,8 @@ describe BlueBottle::CodingQuestion do
         end
 
         it 'Bella Donovan has two subscriptions, one active, one cancelled' do
-          expect(bella_donovan.subscribers.size).to eq(2)
+          db_ish = store.store
+          expect(bella_donovan.total_subscribers(db_ish)).to eq(2)
         end
       end
     end
